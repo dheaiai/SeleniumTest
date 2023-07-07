@@ -3,3 +3,9 @@ Verifyloginfunctionalitywithvalidcredentials:
   username: "Admin"
   password: "admin123"
   expected: "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"
+Verifyloginfunctionalitywithinvalidcredentials:
+  url: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  username: "Admin"
+  password: "admin1234"
+  expected: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  expected2: "Invalid credentials"
