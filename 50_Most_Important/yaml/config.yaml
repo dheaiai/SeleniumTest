@@ -9,3 +9,10 @@ Verifyloginfunctionalitywithinvalidcredentials:
   password: "admin1234"
   expected: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
   expected2: "Invalid credentials"
+VerifyloginfunctionalityForgotPassword:
+  url: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  reseturl: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode"
+  username: "Admin"
+  expected: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/sendPasswordReset"
+  expected2: "Reset Password link sent successfully"
+
