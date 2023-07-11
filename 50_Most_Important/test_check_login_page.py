@@ -2,6 +2,7 @@
 import unittest
 import yaml
 import time
+import inspect
 from tools.logs import LogInformation
 #import logging
 from selenium import webdriver
@@ -20,6 +21,10 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
         self.loggingData = LogInformation(namefile=__class__.__name__)
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Class Name - " + __class__.__name__)
         self.driver = webdriver.Chrome()
+        self.username = (By.NAME, "username")
+        self.password = (By.NAME, "password")
+        self.SubmitBtn = (By.CLASS_NAME, "oxd-button")
+        self.mainmenu = (By.CSS_SELECTOR, "a.oxd-main-menu-item")
 
     # real data from yaml file
     def readyaml(self, toFetchTestData):
@@ -31,7 +36,7 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
     def test_check_login(self):
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="*******Starting test - test_check_login********")
         driver = self.driver
-        TestData = self.readyaml(toFetchTestData=VerifyloginPage.test_check_login.__name__)
+        TestData = self.readyaml(toFetchTestData=inspect.currentframe().f_code.co_name)
 
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="url - " + TestData['url'])
         driver.get(TestData['url'])
@@ -40,27 +45,28 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
 
         timeout = 5
         try:
-            element_present = EC.presence_of_element_located((By.NAME, "username"))
+            element_present = EC.presence_of_element_located(self.username)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")
 
-        username_textbox = driver.find_element(By.NAME, "username")
+        
+        username_textbox = driver.find_element(*(self.username))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="username - " + TestData['username'])
         username_textbox.send_keys(TestData['username'])
 
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="password - " + TestData['password'])
-        password_textbox = driver.find_element(By.NAME, "password")
+        password_textbox = driver.find_element(*(self.password))
         password_textbox.send_keys(TestData['password'])
 
-        SignIn_button = driver.find_element(By.CLASS_NAME, "oxd-button")
+        SignIn_button = driver.find_element(*(self.SubmitBtn))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Press Submit Button")
         SignIn_button.submit()
 
         timeout = 10
         try:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Wait page to be load completely")
-            element_present = EC.presence_of_element_located((By.CSS_SELECTOR, "a.oxd-main-menu-item"))
+            element_present = EC.presence_of_element_located(self.mainmenu)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")

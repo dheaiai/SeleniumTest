@@ -1,0 +1,36 @@
+2023-07-11 22:37:08,953 - Class Name - VerifyloginPage
+2023-07-11 22:37:17,120 - *******Starting test - test_check_forgot_password********
+2023-07-11 22:37:17,122 - {'url': 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', 'reseturl': 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode', 'username': 'Admin', 'expected': 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/sendPasswordReset', 'expected2': 'Reset Password link sent successfully'}
+2023-07-11 22:37:17,122 - url - https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+2023-07-11 22:37:26,573 - Press - Forgot your password?
+2023-07-11 22:37:30,197 - reseturl-https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode
+2023-07-11 22:37:30,203 - actualurl-https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode
+2023-07-11 22:37:30,217 - Enter username - Admin
+2023-07-11 22:37:32,763 - Press Reset Password Button
+2023-07-11 22:37:34,222 - expectedUrl after pressing ResetPassword - https://opensource-demo.orangehrmlive.com/web/index.php/auth/sendPasswordReset
+2023-07-11 22:37:34,225 - actualUrl after pressing ResetPassword - https://opensource-demo.orangehrmlive.com/web/index.php/auth/sendPasswordReset
+2023-07-11 22:37:35,052 - expectedString on sendPasswordReset is - Reset Password link sent successfully
+2023-07-11 22:37:35,147 - actualString on sendPasswordReset is - Reset Password link sent successfully
+2023-07-11 22:37:35,147 - ******* End test - test_check_forgot_password ********
+2023-07-11 22:37:35,345 - Class Name - VerifyloginPage
+2023-07-11 22:37:40,788 - *******Starting test - test_check_login********
+2023-07-11 22:37:40,791 - {'url': 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', 'username': 'Admin', 'password': 'admin123', 'expected': 'https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index'}
+2023-07-11 22:37:40,791 - url - https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+2023-07-11 22:37:50,125 - username - Admin
+2023-07-11 22:37:51,298 - password - admin123
+2023-07-11 22:37:51,761 - Press Submit Button
+2023-07-11 22:37:51,971 - Wait page to be load completely
+2023-07-11 22:38:07,362 - expectedUrl - https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+2023-07-11 22:38:07,362 - actualUrl - https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+2023-07-11 22:38:07,362 - *******End test - test_check_login********
+2023-07-11 22:38:07,537 - Class Name - VerifyloginPage
+2023-07-11 22:38:12,955 - *******Starting test - test_check_login_failed********
+2023-07-11 22:38:12,958 - {'url': 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', 'username': 'Admin', 'password': 'admin1234', 'expected': 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', 'expected2': 'Invalid credentials'}
+2023-07-11 22:38:12,958 - url - https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+2023-07-11 22:38:22,242 - username - Admin
+2023-07-11 22:38:23,324 - password - admin1234
+2023-07-11 22:38:28,392 - expectedUrl - https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+2023-07-11 22:38:28,393 - actualUrl - https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+2023-07-11 22:38:29,655 - expectedString - Invalid credentials
+2023-07-11 22:38:29,655 - actualString - Invalid credentials
+2023-07-11 22:38:29,655 - *******End test - test_check_login_failed********
