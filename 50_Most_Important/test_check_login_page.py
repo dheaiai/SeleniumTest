@@ -25,6 +25,11 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
         self.password = (By.NAME, "password")
         self.SubmitBtn = (By.CLASS_NAME, "oxd-button")
         self.mainmenu = (By.CSS_SELECTOR, "a.oxd-main-menu-item")
+        self.InvalidCredentials = (By.XPATH, '//*[text()="Invalid credentials"]')
+        self.ForgotPasswordBtn = (By.CSS_SELECTOR, "p.oxd-text.oxd-text--p.orangehrm-login-forgot-header")
+        self.ForgotPasswordLevel = (By.CSS_SELECTOR, "h6.oxd-text.oxd-text--h6.orangehrm-forgot-password-title")
+        self.ResetPasswordBtn = (By.CSS_SELECTOR, "button.oxd-button.oxd-button--large.oxd-button--secondary.orangehrm-forgot-password-button.orangehrm-forgot-password-button--reset")
+        self.ResetLinkSent = (By.CSS_SELECTOR, "h6.oxd-text.oxd-text--h6.orangehrm-forgot-password-title")
 
     # real data from yaml file
     def readyaml(self, toFetchTestData):
@@ -91,25 +96,25 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
 
         timeout = 5
         try:
-            element_present = EC.presence_of_element_located((By.NAME, "username"))
+            element_present = EC.presence_of_element_located(self.username)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             logging.error("Timed out waiting for page to load")
 
-        username_textbox = driver.find_element(By.NAME, "username")
+        username_textbox = driver.find_element(*(self.username))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="username - " + TestData['username'])
         username_textbox.send_keys(TestData['username'])
 
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="password - " + TestData['password'])
-        password_textbox = driver.find_element(By.NAME, "password")
+        password_textbox = driver.find_element(*(self.password))
         password_textbox.send_keys(TestData['password'])
 
-        SignIn_button = driver.find_element(By.CLASS_NAME, "oxd-button")
+        SignIn_button = driver.find_element(*(self.SubmitBtn))
         SignIn_button.submit()
 
         timeout = 10
         try:
-            element_present = EC.presence_of_element_located((By.CSS_SELECTOR, "p.oxd-text"))
+            element_present = EC.presence_of_element_located(self.mainmenu)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")
@@ -121,7 +126,7 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
         self.assertIn(expectedUrl, actualUrl)
 
         
-        InvalidCredentials = driver.find_element(By.XPATH, '//*[text()="Invalid credentials"]')
+        InvalidCredentials = driver.find_element(*(self.InvalidCredentials))
         actualString=InvalidCredentials.text
         expectedString= TestData['expected2']
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="expectedString - " + expectedString)
@@ -142,17 +147,17 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
 
         timeout = 5
         try:
-            element_present = EC.presence_of_element_located((By.NAME, "username"))
+            element_present = EC.presence_of_element_located(self.username)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")
 
-        ForgotPassword = driver.find_element(By.CSS_SELECTOR, "p.oxd-text.oxd-text--p.orangehrm-login-forgot-header")
+        ForgotPassword = driver.find_element(*(self.ForgotPasswordBtn))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Press - Forgot your password?")
         ForgotPassword.click()
 
         try:
-            element_present = EC.presence_of_element_located((By.CSS_SELECTOR, "h6.oxd-text.oxd-text--h6.orangehrm-forgot-password-title"))
+            element_present = EC.presence_of_element_located(self.ForgotPasswordLevel)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")
@@ -161,11 +166,11 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="actualurl-" + driver.current_url)
         self.assertIn(TestData['reseturl'], driver.current_url)
 
-        username_textbox = driver.find_element(By.NAME, "username")
+        username_textbox = driver.find_element(*(self.username))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Enter username - " + TestData['username'])
         username_textbox.send_keys(TestData['username'])
 
-        ResetPassword = driver.find_element(By.CSS_SELECTOR, "button.oxd-button.oxd-button--large.oxd-button--secondary.orangehrm-forgot-password-button.orangehrm-forgot-password-button--reset")
+        ResetPassword = driver.find_element(*(self.ResetPasswordBtn))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Press Reset Password Button")
         ResetPassword.submit()
         self.assertIn(TestData['expected'], driver.current_url)
@@ -174,12 +179,12 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="actualUrl after pressing ResetPassword - "+ driver.current_url)
 
         try:
-            element_present = EC.presence_of_element_located((By.CSS_SELECTOR, "h6.oxd-text.oxd-text--h6.orangehrm-forgot-password-title"))
+            element_present = EC.presence_of_element_located(self.ResetLinkSent)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
             self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")
 
-        expected2 = driver.find_element(By.CSS_SELECTOR, "h6.oxd-text.oxd-text--h6.orangehrm-forgot-password-title")
+        expected2 = driver.find_element(*(self.ResetLinkSent))
 
         self.assertIn(TestData['expected2'], expected2.text)
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="expectedString on sendPasswordReset is - "+ TestData['expected2'])
