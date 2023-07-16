@@ -1,12 +1,10 @@
-#Tools
+# Tools
 import unittest
 import yaml
-import time
 import inspect
 from tools.logs import LogInformation
-#import logging
+# import logging
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
@@ -15,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class VerifyloginPage(unittest.TestCase, LogInformation):
 
-    loggingData=""
+    loggingData = ""
 
     def setUp(self):
         self.loggingData = LogInformation(namefile=__class__.__name__)
@@ -99,7 +97,7 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
             element_present = EC.presence_of_element_located(self.username)
             WebDriverWait(driver, timeout).until(element_present)
         except TimeoutException:
-            logging.error("Timed out waiting for page to load")
+            self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Timed out waiting for page to load")
 
         username_textbox = driver.find_element(*(self.username))
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="username - " + TestData['username'])
