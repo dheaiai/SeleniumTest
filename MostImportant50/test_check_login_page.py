@@ -85,7 +85,7 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
     def test_check_login_failed(self):
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="*******Starting test - test_check_login_failed********")
         driver = self.driver
-        TestData = self.readyaml(toFetchTestData=VerifyloginPage.test_check_login_failed.__name__)
+        TestData = self.readyaml(toFetchTestData=inspect.currentframe().f_code.co_name)
 
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="url - " + TestData['url'])
         driver.get(TestData['url'])
@@ -136,7 +136,7 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
     def test_check_forgot_password(self):
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="*******Starting test - test_check_forgot_password********")
         driver = self.driver
-        TestData = self.readyaml(toFetchTestData=VerifyloginPage.test_check_forgot_password.__name__)
+        TestData = self.readyaml(toFetchTestData=inspect.currentframe().f_code.co_name)
 
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="url - " + TestData['url'])
         driver.get(TestData['url'])
