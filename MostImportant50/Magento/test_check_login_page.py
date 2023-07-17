@@ -2,9 +2,6 @@
 import inspect
 import unittest
 import yaml
-# Selenium
-from selenium.webdriver.chrome import webdriver
-from selenium.webdriver.common.by import By
 # Library
 from MostImportant50.APILayer.API import *
 from MostImportant50.tools.logs import LogInformation
@@ -17,12 +14,12 @@ class VerifyloginPage(unittest.TestCase, LogInformation):
     def setUp(self):
         self.loggingData = LogInformation(namefile=__class__.__name__)
         self.loggingData.TEST_INFORMATION(namefile=__class__.__name__, message="Class Name - " + __class__.__name__)
-        self.driver = webdriver.Chrome()
+        self.driver = web_driver()
         self.driver.fullscreen_window()
-        self.username = (By.NAME, "login[username]")
-        self.password = (By.NAME, "login[password]")
-        self.SubmitBtn = (By.ID, "send2")
-        self.mainmenu = (By.CLASS_NAME, "ui.nav.items")
+        self.username = ["NAME", "login[username]"]
+        self.password = ["NAME",  "login[password]"]
+        self.SubmitBtn = ["ID", "send2"]
+        self.mainmenu = ["CLASS_NAME", "ui.nav.items"]
 
     # real data from yaml file
     def readyaml(self, toFetchTestData):
