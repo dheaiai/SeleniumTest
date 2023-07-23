@@ -1,0 +1,18 @@
+test_check_login:
+  url: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  username: "Admin"
+  password: "admin123"
+  expected: "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"
+test_check_login_failed:
+  url: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  username: "Admin"
+  password: "admin1234"
+  expected: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  expected2: "Invalid credentials"
+test_check_forgot_password:
+  url: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+  reseturl: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode"
+  username: "Admin"
+  expected: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/sendPasswordReset"
+  expected2: "Reset Password link sent successfully"
+

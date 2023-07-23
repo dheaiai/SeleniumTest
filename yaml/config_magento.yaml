@@ -1,0 +1,7 @@
+test_check_login:
+  url: "https://magento.softwaretestingboard.com/customer/account/login/"
+  username: "dheerajjain60@gmail.com"
+  password: "Jan@2012"
+  expected: "https://magento.softwaretestingboard.com/"
+test_check_search:
+  searchFor: "yoga mat"
